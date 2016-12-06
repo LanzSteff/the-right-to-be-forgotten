@@ -1,0 +1,65 @@
+\chapter{Making Programs Forget}
+\section{Einleitung}
+Sobald Daten in eine Applikation geladen werden, ist es schwierig Richtlinien festzulegen, wie diese Daten behandelt werden und wie sensible Daten geschützt oder wieder gelöscht werden, ohne dass die Applikation schon im Vorhinein auf diese Richtlinien programmiert wurde. Nur neue Applikationen, die diese Richtlinien einhalten, können eine Lösung für das Problem bieten.
+
+Weiters ist keinem Benutzer garantiert, dass das Leeren der History oder das Löschen einer E-Mail ausreicht, sodass nichts mehr der sensiblen Daten im Speicher oder auf der Festplatte vorhanden ist. Sie können bereits versehentlich in die Zwischenablage kopiert, von einem Programm im Speicher gecached oder von einer E-Mail zu einer anderen gesendet worden sein.
+
+Daher stellt diese Arbeit die \textit{"`guaranteed data lifetime"'}-Eigenschaft von Kannan et al.\cite{kannan} vor, womit Daten nur eine minimale Dauer in einem System aufrecht erhalten bleiben, wie sie benötigt werden. Solch eine Eigenschaft ist leicht zu erreichen, wenn Applikationen diese unterstützen. Doch ein Ziel ist auch, dass man nicht auf die Unterstützung von Programmen angewiesen ist.
+
+Ein einfacher Weg um dieses Ziel zu erreichen, ist eine Virtual Machine, welche vom Benutzer gestartet wird und solange verwendet wird, wie sensible Daten benötigt oder verarbeitet werden. Jedoch werden dadurch auch andere Daten nach Beendigung entsorgt und eine Veränderung des Benutzerverhaltens ist nötig.
+
+\subsection{Ziel}
+Die \textit{"`guaranteed data lifetime"'}-Eigenschaft stellt drei Bedingungen, die erzielt werden sollen. 
+
+Zuerst soll es eine garantierte Lebenszeitgrenze geben, ohne auf andere Applikationen angewiesen zu sein. 
+
+Zweitens darf die korrekte Ausführung der Programme nicht beeinflusst werden und die Programme dürfen bei Ende der Lebensdauer von Daten nicht abstürzen.
+
+Drittens soll die Benutzbarkeit für den Benutzer nicht eingeschränkt werden. Der Benutzer soll keine Veränderung im Verhalten der Applikation bemerken.
+
+\subsection{State of the Art}
+Um \textit{"`guaranteed data lifetime"'} zu verwirklichen, gibt es bereits einige Ansätze. Chow et al.\cite{chow} schlägt die sofortige Löschung von Daten nach deren Deallozierung vor. Borders et al.\cite{borders} empfiehlt alle sensiblen Daten in einer stand-alone Virtaul Machine zu bearbeiten. TightLip\cite{tightlip} verwendet Shadow Prozesse, um Datenverlust von Applikationen zu externen Maschinen zu verhindern. Und Perlman\cite{perlman} präsentiert ein File System, in dem Dateien mit Richtlinien assoziiert werden können, welche nach einer gewissen Zeit nicht mehr lesbar sein sollen, indem eine Datei mit einem Schlüssel verschlüsselt wird, welcher nur eine gewisse Zeit von einem Master Server verfügbar ist.
+
+\section{Framework}
+\subsection{Status-Wiederherstellung}
+Um die Lebensdauer von Daten zu garantieren verwendet das Framework Status-Wiederherstellung. Beim Empfang von sensiblen Daten wird kurz vorher ein Snapshot der Applikation als Checkpoint genommen, auf welchen nach Beendigung der Lebensdauer zurückgesetzt wird. Dadurch werden aber auch alle Status und Veränderungen überschrieben, die seit dem Snapshot geschehen sind und für den Benutzer auch noch nach der Lebensdauer wichtig sind. Um das zu verhindern, werden vom Framework alle Inputs nach Empfang der sensiblen Daten mitgeloggt und nach dem zurücksetzen zum Checkpoint wieder abgespielt, sodass die Applikation dem aktuellen Status ohne den sensiblen Daten entspricht.
+
+\subsection{Drei Phasen}
+Während der Laufzeit durchläuft das Framework drei Phasen in der Applikations- oder Betriebssystemschicht.
+
+In der ersten Phase muss sensibler Input erkannt werden, welcher über verschiedene Wege wie Tastatur oder Netzwerk an die Applikation geliefert werden kann. Es werden zwei Arten für den Input vorgeschlagen. Die Erste läuft via Tastatur, über die der Benutzer sensiblen Input mit einer speziellen Buchstabensequenz mit den Informationen über die Lebensdauer eingeben kann. Bei der Zweiten kommt der Input von einer externen Datenquelle, wie zum Beispiel über SMTP. So kann zum Beispiel der Sender mittels einer speziellen SMTP Option sensible Daten markieren und deren Lebensdauer mitgeben.
+
+Sobald ein sensibler Input erkannt wird, wird ein Checkpoint der Applikation generiert. Dieser beinhaltet den Applikationszustand, Speicher, Register, Threads und deren Zustände. Ferner werden alle nachfolgenden Inputs zur Applikation, sensibel oder nicht, geloggt.
+
+Die wichtigste Phase beginnt, wenn die Lebensdauer sensibler Daten vorüber ist. Wenn die Applikation mit den sensiblen Daten bereits beendet wurde, wird nichts unternommen und falls nicht, wird der Speicher gelöscht und die Applikation wird von dem System zum Checkpoint zurückgesetzt und alle nachfolgenden, mitgeloggten Inputs werden Schritt für Schritt wiederhergestellt, sodass die Applikation wieder in einem äquivalenten Status weiterläuft.
+
+Dieser Ansatz kann auch mit mehreren sensiblen Daten und somit mehreren Checkpoints durchgeführt werden.
+
+\section{Herausforderungen}
+Die Status-Wiederherstellung bringt auch einige Probleme mit sich.
+\subsection{Fidelity}
+Die wichtigste Herausforderung stellt sich beim Applikationszustand nach der Wiederherstellung, dass dieser mit den Erwartungen des Benutzers übereinstimmt und das Fehlen von sensiblen Daten nicht mit der Reihenfolge oder dem Index für andere Daten in Konflikt kommt. 
+
+Der erste und einfachste Lösungsvorschlag ist Wiederherstellung mit Wegfall. Hier wird der Input von weiteren sensiblen Daten während der Wiederherstellung untersagt, womit die Sicherheit garantiert werden kann, jedoch die Benutzbarkeit und Verwendbarkeit der Applikation sehr darunter leiden muss. 
+
+Ein weiterer Vorschlag ist die Wiederherstellung mit Ersetzung, wo abgelaufene sensible Daten durch nicht-sensible Daten ersetzt werden. Zum Beispiel wird eine sensible E-Mail durch eine E-Mail mit dem Inhalt "`Dies ist eine sensible E-Mail, deren Lebensdauer abgelaufen ist."' ausgetauscht. Hier kann die Applikation eventuell Probleme mit den Metadaten dieser E-Mail bekommen, da sich Werte wie die Länge der E-Mail auf einmal ändern können.
+
+Die letzte Lösung ist Wiederherstellung mit gleichbleibender Ersetzung, welche dem vorherigen Vorschlag entspricht, jedoch sensible Daten durch gleichwertige Daten ersetzt, sodass die Applikation mit den neuen Daten einfach zurechtkommt und keine Daten vermisst. Diese Methode verspricht die Erfolgversprechendste zu sein.
+
+\subsection{Pervasiveness}
+Ein weiteres Problem birgt die mögliche Verbreitung der Daten, denn es kann eventuell vorkommen, dass sensible Daten im System verweilen. Input für Applikationen wird normalerweise über das Betriebssystem gesendet und verarbeitet. Dadurch können Kopien vom Betriebssystem angelegt werden, die später in Phase drei nicht gelöscht werden. Genauso können auch Kopien von Screen-Output und Netzwerk-Output angelegt werden. 
+
+Ein Ansatz dieses Problem zu beseitigen ist, dass ein Virtual Machine Monitor (VMM) auf Betriebssystemschicht implementiert wird, sodass das Framework alle Inputs und Outputs des Betriebssystems erfassen kann. Man muss jedoch noch beachten, dass der VMM nicht selbst Daten in den Buffer schreibt.
+
+\subsection{Containment}
+Oft kommunizieren Applikationen mit anderen Entitäten auf der selben oder auf externen Maschinen. Also können durch Output sensible Daten verbreitet werden oder Inputs kommen, welcher nur für die originale Ausführung anwendbar sind.
+
+Sendet die Applikation einen Output zu anderen Entitäten, kann in manchen Umständen überprüft werden, ob die andere Maschine ebenfalls über das \textit{"`guaranteed data lifetime"'} Framework verfügt. Falls das nicht der Fall oder nicht möglich ist, kann gewartet werden bis die Lebensdauer der Daten abgelaufen ist und danach die unsensiblen ersetzten Daten gesendet werden. Der einfachste Weg ist die Entscheidung des Benutzers einzuholen und nur auf Bestätigung sensible Daten zu versenden.
+
+Erhält die Applikation Input von anderen Entitäten steigt die Schwierigkeit mit der Wiedergabegenauigkeit nach der Wiederherstellung, sodass es zu Problemen mit der Benutzbarkeit kommen kann. Man kann versuchen bekannte Requests und Responses von anderen Maschinen abzufangen und entsprechend für das Programm aufarbeiten oder Inputs die Probleme bereiten können werden einfach ignoriert. Dieses Problem muss noch weiter untersucht werden, um eine zufriedenstellende Lösung zu finden.
+
+\subsection{Overhead}
+Zu den vorherigen Problemen stellt sich noch die Frage, ob das System die Performance nachteilig beeinflusst. Dabei stellte sich heraus, dass der Overhead beim Erkennen von sensiblen Daten, ob über Keyboard oder über das System, auch bei großen Mengen klein ist. Auch das Erstellen der Checkpoints ist eine einmalige Sache und birgt nur wenig Schwierigkeiten. Ein Problem kann es beim Loggen der Inputs geben, da dies zu jeder Zeit geschieht bis die Lebensdauer der sensiblen Daten abgelaufen ist. Jedoch kann auch diese Herausforderung von heutigen multi-core System bewältigt werden. Zuletzt muss vom System noch die Wiederherstellung verarbeitet werden, welche jedoch parallel zur Applikation geschehen kann und somit keine Auswirkung auf die Performance bringt.
+
+\section{Fazit}
+Kannan et al.\cite{kannan} stellen ein solides Konzept zur Verfügung, welches sensible Daten auf Dauer mit einer Lebenszeit versehen kann ohne dass diese eventuell in falsche Hände geraten können und Schaden verursachen. Alles mit dem Vorteil, dass man von Applikationen unabhängig bleibt und deren korrekte Ausführung beeinflusst oder die Benutzbarkeit für den Benutzer verschlechtert. Gewisse Herausforderungen müssen noch überarbeitet werden, doch grundsätzlich sind Lösungen dafür vorhanden.

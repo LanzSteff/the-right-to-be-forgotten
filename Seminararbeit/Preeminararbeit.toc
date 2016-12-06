@@ -1,0 +1,28 @@
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {1}Hintergr\"unde}{3}
+\contentsline {section}{\numberline {1.1}Einleitung}{3}
+\contentsline {section}{\numberline {1.2}Der Pr\"azedenzfall}{3}
+\contentsline {section}{\numberline {1.3}Urteil}{4}
+\contentsline {chapter}{\numberline {2}Reaktionen}{5}
+\contentsline {section}{\numberline {2.1}Google}{5}
+\contentsline {section}{\numberline {2.2}Kritik}{5}
+\contentsline {section}{\numberline {2.3}International}{6}
+\contentsline {chapter}{\numberline {3}Digitales Vergessen}{7}
+\contentsline {section}{\numberline {3.1}Vergeben und Vergessen}{7}
+\contentsline {section}{\numberline {3.2}Digitale Identit\"at}{7}
+\contentsline {section}{\numberline {3.3}M\"oglichkeiten}{8}
+\contentsline {subsection}{\numberline {3.3.1}Verbreitung kontrollieren}{8}
+\contentsline {subsection}{\numberline {3.3.2}Verstecken}{8}
+\contentsline {chapter}{\numberline {4}Making Programs Forget}{9}
+\contentsline {section}{\numberline {4.1}Einleitung}{9}
+\contentsline {subsection}{\numberline {4.1.1}Ziel}{9}
+\contentsline {subsection}{\numberline {4.1.2}State of the Art}{10}
+\contentsline {section}{\numberline {4.2}Framework}{10}
+\contentsline {subsection}{\numberline {4.2.1}Status-Wiederherstellung}{10}
+\contentsline {subsection}{\numberline {4.2.2}Drei Phasen}{10}
+\contentsline {section}{\numberline {4.3}Herausforderungen}{11}
+\contentsline {subsection}{\numberline {4.3.1}Fidelity}{11}
+\contentsline {subsection}{\numberline {4.3.2}Pervasiveness}{12}
+\contentsline {subsection}{\numberline {4.3.3}Containment}{12}
+\contentsline {subsection}{\numberline {4.3.4}Overhead}{13}
+\contentsline {section}{\numberline {4.4}Fazit}{13}

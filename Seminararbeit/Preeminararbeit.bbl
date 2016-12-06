@@ -1,0 +1,82 @@
+\begin{thebibliography}{10}
+
+\bibitem{bishop}
+Matt Bishop, Emily~Rine Butler, Kevin Butler, Carrie Gates, and Steven
+  Greenspan.
+\newblock Forgive and forget: Return to obscurity.
+\newblock In {\em Proceedings of the 2013 Workshop on New Security Paradigms
+  Workshop}, NSPW '13, pages 1--10, New York, NY, USA, 2013. ACM.
+
+\bibitem{bo}
+Cheng Bo, Guobin Shen, Jie Liu, Xiang-Yang Li, YongGuang Zhang, and Feng Zhao.
+\newblock Privacy.tag: Privacy concern expressed and respected.
+\newblock In {\em Proceedings of the 12th ACM Conference on Embedded Network
+  Sensor Systems}, SenSys '14, pages 163--176, New York, NY, USA, 2014. ACM.
+
+\bibitem{borders}
+Kevin Borders, Eric~Vander Weele, Billy Lau, and Atul Prakash.
+\newblock Protecting confidential data on personal computers with storage
+  capsules.
+\newblock In {\em Proceedings of the 18th Conference on USENIX Security
+  Symposium}, SSYM'09, pages 367--382, Berkeley, CA, USA, 2009. USENIX
+  Association.
+
+\bibitem{bygrave}
+Lee~A. Bygrave.
+\newblock A right to be forgotten?
+\newblock {\em Commun. ACM}, 58(1):35--37, December 2014.
+
+\bibitem{chow}
+Jim Chow, Ben Pfaff, Tal Garfinkel, and Mendel Rosenblum.
+\newblock Shredding your garbage: Reducing data lifetime through secure
+  deallocation.
+\newblock In {\em Proceedings of the 14th Conference on USENIX Security
+  Symposium - Volume 14}, SSYM'05, pages 22--22, Berkeley, CA, USA, 2005.
+  USENIX Association.
+
+\bibitem{crowe}
+David Crowe and Wasim~A. Al-Hamdani.
+\newblock Google privacy: Something for nothing?
+\newblock In {\em Proceedings of the 2013 on InfoSecCD '13: Information
+  Security Curriculum Development Conference}, InfoSecCD '13, pages
+  27:27--27:32, New York, NY, USA, 2013. ACM.
+
+\bibitem{graubert}
+R.~Graubert.
+\newblock On the need for a third form of access control.
+\newblock In {\em Proceedings of the 12th National Computer Security
+  Conference}, pages 296--304, 1989.
+
+\bibitem{kannan}
+Jayanthkumar Kannan, Gautam Altekar, Petros Maniatis, and Byung-Gon Chun.
+\newblock Making programs forget: Enforcing lifetime for sensitive data.
+\newblock In {\em Proceedings of the 13th USENIX Conference on Hot Topics in
+  Operating Systems}, HotOS'13, pages 23--23, Berkeley, CA, USA, 2011. USENIX
+  Association.
+
+\bibitem{perlman}
+Radia Perlman.
+\newblock File system design with assured delete.
+\newblock In {\em Proceedings of the Third IEEE International Security in
+  Storage Workshop}, SISW '05, pages 83--88, Washington, DC, USA, 2005. IEEE
+  Computer Society.
+
+\bibitem{wagner}
+Mike Wagner and Yun Li-Reilly.
+\newblock The right to be forgotten.
+\newblock {\em THE ADVOCATE}, 72(6):823--833, November 2014.
+
+\bibitem{ward}
+Philip Ward.
+\newblock The "`right to be forgotten"'.
+\newblock Library, House of Commons, September 2014.
+\newblock SN/HA/6983.
+
+\bibitem{tightlip}
+Aydan~R. Yumerefendi, Benjamin Mickle, and Landon~P. Cox.
+\newblock Tightlip: Keeping applications from spilling the beans.
+\newblock In {\em Proceedings of the 4th USENIX Conference on Networked Systems
+  Design \&\#38; Implementation}, NSDI'07, pages 12--12, Berkeley, CA, USA,
+  2007. USENIX Association.
+
+\end{thebibliography}

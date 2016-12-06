@@ -1,0 +1,254 @@
+\documentclass{beamer}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+%\usepackage{default}
+\usetheme{Copenhagen}
+\usecolortheme{sidebartab}
+
+\title[The right to be forgotten]{The right to be forgotten}
+\author[S. Vikoler]{Stefan Vikoler}
+\institute[Computer Science - University of Salzburg]{Seminar aus Informatik\\ Computer Science\\ University of Salzburg}
+\date[21.05.2015]{21. Mai 2015}
+
+\begin{document}
+
+\frame{
+  \titlepage
+}
+\frame{
+	\frametitle{Inhaltsverzeichnis}
+	\tableofcontents[hideallsubsections]
+}
+\section{Hintergr\"unde}
+\subsection{Einleitung}
+\frame{
+  \frametitle{Einleitung}
+    \begin{itemize}
+      \item Präzedenzfall
+			\item Europäischer Gerichtshof
+      \item 13. Mai 2014
+      \item Google Link verletzt Privatsphäre
+      \item Recht auf Löschung von Suchresultaten
+			\item Balance zwischen privaten und öffentlichen Interessen
+    \end{itemize}
+}
+\frame{
+  \frametitle{Werdegang}
+    \begin{itemize}
+      \item Mario Costeja González
+			\item Sozialversicherungsschulden im Jahr 1998
+      \item zwei Zeitungsartikel von La Vanguardia Ediciones
+			\item Klage gegen Zeitung
+      \item Klage gegen Google
+    \end{itemize}
+}
+\subsection{Urteil}
+\frame{
+  \frametitle{Urteil}
+    \begin{itemize}
+			\item Recht auf Löschung, wenn
+			\begin{itemize}
+				\item unangemessen
+				\item irrelevant
+				\item exzessiv
+				\item nicht mehr aktuell
+				\item nicht mehr relevant
+      \end{itemize}
+			\item alle Suchmaschinen betroffen
+      \item Suchmaschinen als Data Controller
+    \end{itemize}
+}
+
+\section{Reaktionen}
+\subsection{Google}
+\frame{
+  \frametitle{Google}
+    \begin{itemize}
+      \item Daten lokalisieren und präsentieren
+			\item Balkanisierung des Internet
+      \item Onlineformular
+      \item 143000 Löschanfragen in ersten 5 Monaten
+			\item Rechtsabteilung aufgestockt
+    \end{itemize}
+}
+\subsection{Krititk}
+\frame{
+  \frametitle{Kritik}
+    \begin{itemize}
+      \item Redefreiheit
+			\item Zensur des Internet
+      \item öffentliche Interessen
+      \item Geschichte umschreiben
+			\item Interpretationsspielraum
+			\item schwer Umzusetzen für klein Suchmaschinen
+			\item kein wirkliches Vergessen
+    \end{itemize}
+}
+\subsection{International}
+\frame{
+  \frametitle{International}
+    \begin{itemize}
+      \item globales Aufsehen
+			\item Right to be forgotten in Argentinien
+      \item weltweite Fälle
+      \item Thema in der Zukunft
+    \end{itemize}
+}
+\section{Digitales Vergessen}
+\subsection{Vergeben und Vergessen}
+\frame{
+  \frametitle{Vergeben und Vergessen}
+    \begin{itemize}
+      \item religiös
+			\item kulturell
+      \item vergebene Taten werden vergessen
+      \item Neustart in neuer Umgebung
+			\item digitale Sünden
+    \end{itemize}
+}
+\frame{
+  \frametitle{Digitale Identität}
+    \begin{itemize}
+      \item Möglichkeit sich neu zu erfinden
+			\item mehrere Pseudonyme
+      \item Social Media
+			\begin{itemize}
+				\item Verschmelzung von privaten und öffentlichen Leben
+			\end{itemize}
+			\item Internet als Lügennetz
+    \end{itemize}
+}
+\subsection{M\"oglichkeiten}
+\frame{
+  \frametitle{Verbreitung kontrollieren}
+    \begin{itemize}
+      \item Originator-Controlled access control
+			\item Links zu Daten verbreiten
+      \item Information lifetime
+      \item Wer besitzt Daten?
+    \end{itemize}
+}
+\frame{
+  \frametitle{Verstecken}
+    \begin{itemize}
+      \item Irreführen und überfluten
+			\begin{itemize}
+				\item 2. Weltkrieg
+				\item Honeypots
+			\end{itemize}
+			\item Unterschieben
+      \item Bedeutung verändern
+    \end{itemize}
+}
+
+\section{Vergessliche Programme}
+\subsection{Einleitung}
+\frame{
+  \frametitle{Einleitung}
+    \begin{itemize}
+      \item Policy
+			\item Sensible Daten garantiert entfernen
+      \item garanteed data lifetime property
+      \item ohne Unterstützung der Applikation
+			\item Virtual Machine
+    \end{itemize}
+}
+\frame{
+  \frametitle{Ziel}
+    \begin{itemize}
+      \item garanteed data lifetime
+			\begin{itemize}
+				\item ohne auf Applikation angewiesen zu sein
+				\item ohne Beeinträchtigung der Applikation
+				\item ohne Einschränkung der Benutzbarkeit
+			\end{itemize}
+    \end{itemize}
+}
+\frame{
+  \frametitle{Related Work}
+    \begin{itemize}
+      \item sofortige Löschung nach Deallozierung von Daten
+			\item sensible Daten werden in standalone VM bearbeitet
+      \item Shadow processes
+      \item File systems
+    \end{itemize}
+}
+\subsection{State Reincarnation}
+\frame{
+  \frametitle{Framework}
+    \begin{itemize}
+      \item Snapshot bei Empfang von sensiblen Daten als Checkpoint
+			\item Logging aller Inputs nach Empfang
+      \item Replay vom Checkpoint
+    \end{itemize}
+}
+\frame{
+  \frametitle{3 Phasen}
+    \begin{itemize}
+      \item sensiblen Input erkennen
+			\item Checkpoints und Logging
+      \item Replay mit verändertem Input
+    \end{itemize}
+}
+\subsection{Herausforderungen}
+\frame{
+  \frametitle{Fidelity}
+    \begin{itemize}
+      \item Applikations-Zustand nach Replay
+			\item Replay with Omission
+			\item Replay with Substitution
+			\item Replay with Consistent Substitution
+    \end{itemize}
+}
+\frame{
+  \frametitle{Pervasiveness}
+    \begin{itemize}
+      \item sensible Daten die im System verweilen
+			\item gespeicherte Kopien durch
+			\begin{itemize}
+				\item Betriebssystem
+				\item Screen-Output
+				\item Network-Output
+			\end{itemize}
+      \item Virtual Machine Monitor
+      \begin{itemize}
+				\item ohne Buffer
+			\end{itemize}
+    \end{itemize}
+}
+\frame{
+  \frametitle{Containment}
+    \begin{itemize}
+      \item Kommunikation zwischen anderen Entitäten
+			\item Outputs
+			\begin{itemize}
+				\item besitzt selbst Lifetime Framework
+				\item warten bis lifetime ablauft
+				\item Entscheidung des Benutzers
+			\end{itemize}
+			\item Inputs
+			\begin{itemize}
+				\item Problem für die Benutzbarkeit
+				\item bekannte Requests und Responses versuchen abzufangen
+				\item einfach ignorieren
+				\item wird noch untersucht
+			\end{itemize}
+    \end{itemize}
+}
+\frame{
+  \frametitle{Overhead}
+    \begin{itemize}
+      \item Performance-Probleme
+			\item klein beim Erkennen der sensiblen Daten
+      \item klein beim Erstellen des Checkpoints
+      \item groß beim Logging
+			\item Replay kann parallel laufen
+    \end{itemize}
+}
+\frame{
+  \includegraphics[width=300px]{ending.jpg}
+}
+
+\end{document}
